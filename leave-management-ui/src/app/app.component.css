@@ -1,0 +1,27 @@
+/* Basic styling for the shell */
+    :host { font-family: sans-serif; display: block; }
+    .navbar { 
+      background-color: #0056b3; 
+      color: white; 
+      padding: 1rem 2rem; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .brand { font-size: 1.5rem; font-weight: bold; }
+    .nav-links { 
+      list-style: none; 
+      display: flex; 
+      gap: 1.5rem; 
+      margin: 0; 
+      padding: 0; 
+    }
+    .nav-links a { 
+      color: white; 
+      text-decoration: none; 
+      padding: 0.5rem; 
+      border-radius: 4px;
+    }
+    .nav-links a:hover { background-color: #004494; }
+    .active-link { font-weight: bold; border-bottom: 2px solid white; }
+    .content { padding: 2rem; max-width: 1200px; margin: 0 auto; }

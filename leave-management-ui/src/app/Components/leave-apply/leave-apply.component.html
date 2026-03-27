@@ -1,0 +1,37 @@
+<div class="apply-container">
+  <div class="apply-card">
+    <div class="card-header">
+      <h2>Submit Leave Request</h2>
+      <p>Schedule your upcoming time off.</p>
+    </div>
+
+    <div class="status-alert" *ngIf="statusMessage" [ngClass]="{'error': isError, 'success': !isError}">
+      {{ statusMessage }}
+    </div>
+
+    <div class="form-body">
+      <div class="form-group">
+        <label>Associate ID</label>
+        <input type="text" [value]="associateId" class="form-control disabled-input" disabled />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label for="leaveDate">Date of Absence</label>
+          <input type="date" id="leaveDate" [(ngModel)]="leaveDate" class="form-control" />
+        </div>
+
+        <div class="form-group half-width">
+          <label for="absenceType">Leave Type</label>
+          <select id="absenceType" [(ngModel)]="absenceType" class="form-control select-box">
+            <option value="V">Vacation</option>
+            <option value="S">Sick Leave</option>
+            <option value="P">Personal Day</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-submit" (click)="onSubmit()">Submit Request</button>
+    </div>
+  </div>
+</div>
