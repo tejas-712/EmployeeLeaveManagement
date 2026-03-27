@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\2463712\\Downloads\\Try\\EmployeeLeaveManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5410129A-0D30-98CF-9393-A57A0A8AC507}|EmployeeLeaveManagement\\EmployeeLeaveManagement.csproj|c:\\users\\2463712\\downloads\\try\\employeeleavemanagement\\employeeleavemanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5410129A-0D30-98CF-9393-A57A0A8AC507}|EmployeeLeaveManagement\\EmployeeLeaveManagement.csproj|solutionrelative:employeeleavemanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5410129A-0D30-98CF-9393-A57A0A8AC507}|EmployeeLeaveManagement\\EmployeeLeaveManagement.csproj|c:\\users\\2463712\\downloads\\try\\employeeleavemanagement\\employeeleavemanagement\\employeeleavemanagement.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{5410129A-0D30-98CF-9393-A57A0A8AC507}|EmployeeLeaveManagement\\EmployeeLeaveManagement.csproj|solutionrelative:employeeleavemanagement\\employeeleavemanagement.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\2463712\\Downloads\\Try\\EmployeeLeaveManagement\\EmployeeLeaveManagement\\Program.cs",
+              "RelativeDocumentMoniker": "EmployeeLeaveManagement\\Program.cs",
+              "ToolTip": "C:\\Users\\2463712\\Downloads\\Try\\EmployeeLeaveManagement\\EmployeeLeaveManagement\\Program.cs",
+              "RelativeToolTip": "EmployeeLeaveManagement\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T10:08:25.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmployeeLeaveManagement.http",
+              "DocumentMoniker": "C:\\Users\\2463712\\Downloads\\Try\\EmployeeLeaveManagement\\EmployeeLeaveManagement\\EmployeeLeaveManagement.http",
+              "RelativeDocumentMoniker": "EmployeeLeaveManagement\\EmployeeLeaveManagement.http",
+              "ToolTip": "C:\\Users\\2463712\\Downloads\\Try\\EmployeeLeaveManagement\\EmployeeLeaveManagement\\EmployeeLeaveManagement.http",
+              "RelativeToolTip": "EmployeeLeaveManagement\\EmployeeLeaveManagement.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-03-27T10:08:24.402Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
