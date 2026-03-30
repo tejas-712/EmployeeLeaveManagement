@@ -4,13 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LeaveService } from '../../Services/leave';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
   associateId: string = '';
@@ -30,13 +28,11 @@ export class LoginComponent {
 
     this.leaveService.login(this.associateId, this.password).subscribe({
       next: (user) => {
-        // C# returned Ok(user), so the 'user' variable now holds the employee data!
-        localStorage.setItem('loggedInUser', this.associateId); // Save the ID
         this.errorMessage = '';
-        this.router.navigate(['/apply']); // Navigate to the dashboard
+        this.leaveService.setLoginState(this.associateId); 
+        this.router.navigate(['/apply']); 
       },
       error: (err) => {
-        
         this.errorMessage = 'Invalid credentials. Please try again.';
         console.error(err);
       }

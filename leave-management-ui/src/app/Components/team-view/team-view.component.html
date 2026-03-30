@@ -1,42 +1,45 @@
-<div class="dashboard-container">
-  <div class="dashboard-header">
-    <div>
-      <h2>Team Absence Schedule</h2>
-      <p>View all upcoming employee leaves.</p>
-    </div>
-    <button class="btn-export" (click)="downloadReport()">
-      ⬇ Download Excel Report
-    </button>
-  </div>
-
-  <div class="table-card">
-    <div *ngIf="isLoading" class="loading-state">
-      Loading schedule...
+<div class="page-wrapper">
+  <div class="card shadow-sm" style="width: 100%; max-width: 800px;">
+    
+    <div class="card-header border-bottom header-flex">
+      <div>
+        <h2>Team Absence Schedule</h2>
+        <p class="subtitle">View all upcoming employee leaves.</p>
+      </div>
+      <button class="btn-primary" (click)="downloadReport()">
+        ⬇ Download Excel Report
+      </button>
     </div>
 
-    <table class="data-table" *ngIf="!isLoading">
-      <thead>
-        <tr>
-          <th>Associate ID</th>
-          <th>Date of Absence</th>
-          <th>Leave Type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngIf="leaves.length === 0">
-          <td colspan="3" class="empty-state">No leave requests found.</td>
-        </tr>
-        
-        <tr *ngFor="let leave of leaves">
-          <td><strong>{{ leave.associateId }}</strong></td>
-          <td>{{ leave.leaveDate | date:'mediumDate' }}</td> 
-          <td>
-            <span class="badge" [ngClass]="leave.absenceType">
-              {{ getAbsenceTypeName(leave.absenceType) }}
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="form-body">
+      <div *ngIf="isLoading" class="state-message">
+        Loading schedule...
+      </div>
+
+      <table class="data-table" *ngIf="!isLoading">
+        <thead>
+          <tr>
+            <th>Associate ID</th>
+            <th>Date of Absence</th>
+            <th>Leave Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="leaves.length === 0">
+            <td colspan="3" class="state-message">No leave requests found.</td>
+          </tr>
+          
+          <tr *ngFor="let leave of leaves">
+            <td><strong>{{ leave.associateId }}</strong></td>
+            <td>{{ leave.leaveDate | date:'mediumDate' }}</td> 
+            <td>
+              <span class="badge" [ngClass]="leave.absenceType">
+                {{ getAbsenceTypeName(leave.absenceType) }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

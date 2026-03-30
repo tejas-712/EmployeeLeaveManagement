@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { LeaveRequest } from '../Models/leave-req';
-
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { LeaveRequest } from '../Models/leave-req'; // Adjust path if needed
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeaveService {
-  // 1. Split the URLs to point to the correct C# controllers
   private authUrl = 'https://localhost:7068/api/Auth'; 
-  private leaveUrl = 'https://localhost:7068/api/leave'; // Points to LeaveController
+  private leaveUrl = 'https://localhost:7068/api/leave'; 
 
-  constructor(private http: HttpClient) { }
+  // --- STATE MANAGEMENT ---
+  private loggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('loggedInUser'));
+  isLoggedIn$ = this.loggedIn.asObservable();
 
-  // Auth endpoint uses authUrl
+  constructor(private http: HttpClient, private router: Router) { }
+
+  // --- AUTH ENDPOINTS ---
   login(associateId: string, password: string): Observable<any> {
     const params = new HttpParams()
       .set('associateId', associateId)
@@ -23,9 +26,19 @@ export class LeaveService {
     return this.http.post(`${this.authUrl}/login`, null, { params });
   }
 
-  // Leave endpoints use leaveUrl
+  setLoginState(associateId: string) {
+    localStorage.setItem('loggedInUser', associateId);
+    this.loggedIn.next(true); 
+  }
+
+  logout() {
+    localStorage.removeItem('loggedInUser');
+    this.loggedIn.next(false); 
+    this.router.navigate(['/login']); 
+  }
+
+  // --- LEAVE ENDPOINTS ---
   applyLeave(leave: LeaveRequest): Observable<any> {
-    // We remove the <LeaveRequest> type and add { responseType: 'text' }
     return this.http.post(`${this.leaveUrl}/apply`, leave, { responseType: 'text' });
   }
 
@@ -33,8 +46,7 @@ export class LeaveService {
     return this.http.get<LeaveRequest[]>(`${this.leaveUrl}/all`);
   }
 
- downloadExcel(): Observable<Blob> {
-    // Change this to point to your new 'getleaves' controller
-    return this.http.get(`https://localhost:7068/api/getleaves/download`, { responseType: 'blob' });
+  downloadExcel(): Observable<Blob> {
+    return this.http.get(`https://localhost:7068/api/leave/download`, { responseType: 'blob' });
   }
 }

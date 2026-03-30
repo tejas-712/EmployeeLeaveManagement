@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { LeaveRequest } from '../../Models/leave-req';
 import { LeaveService } from '../../Services/leave';
 
@@ -15,9 +16,19 @@ export class TeamViewComponent implements OnInit {
   leaves: LeaveRequest[] = [];
   isLoading: boolean = true;
 
-  constructor(private leaveService: LeaveService) {}
+  constructor(
+    private leaveService: LeaveService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    // Basic security: Check if logged in before fetching data
+    const storedId = localStorage.getItem('loggedInUser');
+    if (!storedId) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    
     this.fetchLeaves();
   }
 
@@ -34,7 +45,6 @@ export class TeamViewComponent implements OnInit {
     });
   }
 
-  // Maps the single letter codes to full words for the UI
   getAbsenceTypeName(code: string): string {
     switch(code) {
       case 'V': return 'Vacation';

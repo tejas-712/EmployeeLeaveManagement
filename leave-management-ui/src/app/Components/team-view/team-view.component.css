@@ -1,48 +1,11 @@
-.dashboard-container {
-  padding: 2rem 0;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.dashboard-header {
+/* Layout specific to the header of this card */
+.header-flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
 }
 
-.dashboard-header h2 {
-  margin: 0;
-  color: #2c3e50;
-}
-
-.dashboard-header p {
-  margin: 0.25rem 0 0 0;
-  color: #6c757d;
-}
-
-.btn-export {
-  background-color: #198754;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-export:hover {
-  background-color: #157347;
-}
-
-.table-card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  overflow: hidden;
-}
-
+/* Table Styling */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -50,7 +13,7 @@
 }
 
 .data-table th, .data-table td {
-  padding: 1rem 1.5rem;
+  padding: 1rem;
   border-bottom: 1px solid #eaeaea;
 }
 
@@ -67,7 +30,7 @@
   background-color: #fdfdfd;
 }
 
-.empty-state, .loading-state {
+.state-message {
   text-align: center;
   padding: 3rem;
   color: #6c757d;
@@ -83,13 +46,13 @@
 }
 
 .badge.V {
-  background-color: #cce5ff;
-  color: #004085;
+  background-color: #e6ffed;
+  color: #1e7e34;
 }
 
 .badge.S {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #ffeef0;
+  color: #b30000;
 }
 
 .badge.P {
