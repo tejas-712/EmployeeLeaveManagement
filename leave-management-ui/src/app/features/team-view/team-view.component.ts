@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { LeaveRequest } from '../../Models/leave-req';
-import { LeaveService } from '../../Services/leave';
+import { LeaveRequest } from '../../shared/Models/leave-req';
+import { LeaveService } from '../../core/Services/leaveservice';
 
 
 @Component({

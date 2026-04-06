@@ -1,0 +1,32 @@
+<button class="chat-fab" *ngIf="!isOpen" (click)="toggleChat()">💬 Help</button>
+
+<div class="chat-window" *ngIf="isOpen">
+  <div class="chat-header">
+    <strong>Leave Assistant</strong>
+    <button class="close-btn" (click)="toggleChat()">✖</button>
+  </div>
+  
+  <div class="chat-messages">
+    <div *ngFor="let msg of messages" 
+         [ngClass]="msg.isUser ? 'message-user' : 'message-bot'">
+      
+      <div class="message-bubble">{{ msg.text }}</div>
+      
+      <div *ngIf="msg.action === 'SHOW_CALENDAR'" class="chat-widget">
+         <input type="date" [(ngModel)]="selectedDate" class="widget-input">
+         <select [(ngModel)]="leaveType" class="widget-input">
+            <option value="C">Casual Leave</option>
+            <option value="S">Sick Leave</option>
+            <option value="V">Earned Leave</option>
+         </select>
+         <button class="widget-btn" (click)="submitLeaveFromChat()">Confirm Leave</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="chat-input-area">
+    <input type="text" [(ngModel)]="userInput" (keyup.enter)="sendMessage()" placeholder="Ask me something...">
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>

@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './Components/login/login.component';
-import { LeaveApplyComponent } from './Components/leave-apply/leave-apply.component';
-import { TeamViewComponent } from './Components/team-view/team-view.component';
+import { LoginComponent } from './features/login/login.component';
+import { LeaveApplyComponent } from './features/leave-apply/leave-apply.component';
+import { TeamViewComponent } from './features/team-view/team-view.component';
+import { AddEmployeeComponent } from './features/add-employee/add-employee.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
     // Redirect empty path to login by default
@@ -11,7 +13,10 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'apply', component: LeaveApplyComponent },
   { path: 'team', component: TeamViewComponent },
+  { path: 'add-employee', component: AddEmployeeComponent },
+  { path: 'dashboard', component: DashboardComponent },
 
-  // Wildcard route for a 404 page (optional, redirects to login if URL is unknown)
+
+  
   { path: '**', redirectTo: '/login' }
 ];

@@ -22,7 +22,20 @@
                placeholder="••••••••" class="form-control" (keyup.enter)="onLogin()" />
       </div>
 
-      <button class="btn-primary full-width mt-3" (click)="onLogin()">Login</button>
+     <button 
+  class="btn-primary full-width mt-3" 
+  *ngIf="!(leaveService.isLoggedIn$ | async)" 
+  (click)="onLogin()">
+  Login
+</button>
+
+<!-- Show Logout button only if logged in -->
+<button 
+  class="btn-secondary full-width mt-3" 
+  *ngIf="leaveService.isLoggedIn$ | async" 
+  (click)="leaveService.logout()">
+  Logout
+</button>
     </div>
   </div>
 </div>

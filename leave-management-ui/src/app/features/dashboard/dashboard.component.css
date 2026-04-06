@@ -1,0 +1,162 @@
+body, .main-content {
+  margin: 0;
+  padding: 0;
+  background: #f5f7fa;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;   /* Top margin for spacing from navbar, auto center */
+  padding: 0 0 32px 0;        /* No top padding, only bottom for breathing room */
+  background: transparent;     /* Let the body background show through */
+  min-height: 90vh;           /* Fill most of the viewport */
+}
+
+.dashboard-banner {
+  background: linear-gradient(90deg, #0056b3 0%, #4f8cff 100%);
+  color: #fff;
+  padding: 32px 24px 24px 24px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.dashboard-subtitle {
+  margin-top: 8px;
+  font-size: 1.1rem;
+  color: #e3eaf7;
+}
+
+.dashboard-content {
+  display: flex;
+  gap: 32px;
+}
+
+.dashboard-main {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.dashboard-side {
+  flex: 1;
+  min-width: 320px;
+}
+
+.dashboard-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  margin-bottom: 0;
+}
+
+.dashboard-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.dashboard-balance-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+
+.dashboard-balance-card {
+  flex: 1;
+  background: #f1f5fb;
+  border-radius: 10px;
+  padding: 32px 0;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.balance-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0056b3;
+}
+
+.balance-label {
+  font-size: 1.1rem;
+  color: #495057;
+  margin-top: 6px;
+}
+
+.dashboard-history-card {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.dashboard-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.dashboard-history-table th,
+.dashboard-history-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #e3eaf7;
+}
+
+.dashboard-history-table th {
+  background: #f1f5fb;
+  font-weight: 600;
+  color: #0056b3;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  background: #6c757d;
+  text-transform: capitalize;
+}
+
+.status-badge.approved {
+  background: #28a745;
+}
+.status-badge.pending {
+  background: #ffc107;
+  color: #333;
+}
+.status-badge.rejected {
+  background: #dc3545;
+}
+
+.empty-state {
+  text-align: center;
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.btn-primary {
+  background: #0056b3;
+  color: #fff;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover {
+  background: #003d80;
+}
+
+@media (max-width: 900px) {
+  .dashboard-content {
+    flex-direction: column;
+  }
+  .dashboard-side {
+    min-width: unset;
+  }
+}

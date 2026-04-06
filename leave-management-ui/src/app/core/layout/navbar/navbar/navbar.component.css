@@ -1,0 +1,58 @@
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  color: #0056b3;
+}
+
+.nav-actions { 
+  display: flex; 
+  align-items: center; 
+  gap: 20px; 
+}
+
+.nav-links { 
+  display: flex; 
+  gap: 15px; 
+}
+
+.nav-item { 
+  text-decoration: none; 
+  color: #495057; 
+  font-weight: 500; 
+  padding: 0.5rem; 
+  transition: color 0.2s; 
+}
+
+.nav-item:hover { 
+  color: #0056b3; 
+}
+
+.active-link { 
+  color: #0056b3; 
+  border-bottom: 2px solid #0056b3; 
+}
+
+/* Add your button styles if you haven't globally defined them */
+.btn-primary {
+  background-color: #0056b3;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #0056b3;
+  border: 1px solid #0056b3;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}

@@ -1,0 +1,67 @@
+<div class="dashboard-container">
+  
+
+  <div class="dashboard-content">
+    <!-- Main Column -->
+    <div class="dashboard-main">
+      <!-- Leave Balances -->
+      <div class="dashboard-section">
+        <div class="dashboard-section-header">
+          <h3>Leave Balances</h3>
+          <button class="btn-primary" (click)="openLeaveModal()">Apply for Leave</button>
+
+        </div>
+        <div class="dashboard-balance-cards">
+          <div class="dashboard-balance-card">
+            <div class="balance-value">{{ leaveBalances.sickLeave | number:'1.2-2' }}</div>
+            <div class="balance-label">Sick Leave</div>
+          </div>
+          <div class="dashboard-balance-card">
+            <div class="balance-value">{{ leaveBalances.casualLeave | number:'1.2-2' }}</div>
+            <div class="balance-label">Casual Leave</div>
+          </div>
+          <div class="dashboard-balance-card">
+            <div class="balance-value">{{ leaveBalances.earnedLeave | number:'1.2-2' }}</div>
+            <div class="balance-label">Earned Leave</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leave History -->
+      <div class="dashboard-section">
+        <h3>Recent Leave History</h3>
+        <div class="dashboard-history-card">
+          <table class="dashboard-history-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Leave Type</th>
+                <th>Days</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let leave of pastLeaves">
+                <td>{{ leave.date }}</td>
+                <td>{{ leave.type }}</td>
+                <td>{{ leave.days }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="leave.status.toLowerCase()">{{ leave.status }}</span>
+                </td>
+              </tr>
+              <tr *ngIf="pastLeaves.length === 0">
+                <td colspan="4" class="empty-state">No recent leaves found.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side Column -->
+    <div class="dashboard-side">
+      <app-upcoming-holidays [associateId]="associateId"></app-upcoming-holidays>
+    </div>
+  </div>
+</div>
+<app-leave-apply *ngIf="showApplyLeaveModal" (close)="closeLeaveModal()"></app-leave-apply>

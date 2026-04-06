@@ -1,0 +1,22 @@
+<nav class="top-nav">
+  <div class="nav-brand">
+    <a routerLink="/dashboard" style="text-decoration: none; color: inherit;">
+      <strong>LeaveManager</strong>
+    </a>
+  </div>
+  
+  <div class="nav-actions">
+    <ng-container *ngIf="leaveService.isLoggedIn$ | async; else loggedOut">
+      <div class="nav-links">
+        <a routerLink="/apply" routerLinkActive="active-link" class="nav-item">Apply Leave</a>
+        <a routerLink="/team" routerLinkActive="active-link" class="nav-item">Team View</a>
+        <a routerLink="/add-employee" routerLinkActive="active-link" class="nav-item">Add Employee</a>
+      </div>
+      <button class="btn-outline" (click)="leaveService.logout()">Logout</button>
+    </ng-container>
+    
+    <ng-template #loggedOut>
+      <a routerLink="/login" class="btn-primary" style="text-decoration: none;">Login</a>
+    </ng-template>
+  </div>
+</nav>

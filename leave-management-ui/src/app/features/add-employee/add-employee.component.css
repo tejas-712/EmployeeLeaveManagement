@@ -1,0 +1,43 @@
+.add-employee-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.add-employee-form .form-group {
+  margin-bottom: 1.2rem;
+}
+.add-employee-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+.add-employee-form .form-control {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.btn-primary {
+  background: #0056b3;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-primary:disabled {
+  background: #b3c6e0;
+  cursor: not-allowed;
+}
+.success-message {
+  color: #218838;
+  margin-top: 1rem;
+}
+.error-message {
+  color: #dc3545;
+  margin-top: 1rem;
+}

@@ -1,0 +1,57 @@
+/* Dark background that covers the whole screen */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 27, 68, 0.5); /* Nice dark blue tint */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Keeps it on top of everything */
+  backdrop-filter: blur(3px); /* Optional: Blurs the dashboard behind it */
+}
+
+/* The actual popup box */
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Close 'X' Button */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #6a737d;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #d73a49; /* Turns red when hovered */
+}
+
+.ml-2 {
+  margin-left: 10px;
+}
+
+/* Make sure your form elements still look good! */
+.apply-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}

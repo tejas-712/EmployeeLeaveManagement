@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LeaveService } from '../../Services/leave';
-import { LeaveRequest } from '../../Models/leave-req';
 
+import { LeaveRequest } from '../../shared/Models/leave-req';
+// 1. IMPORT YOUR NEW COMPONENT
+import { UpcomingHolidaysComponent } from '../upcoming-holidays/upcoming-holidays.component'; // Adjust path based on your folder structure
+import { LeaveService } from '../../core/Services/leaveservice';
 
 @Component({
   selector: 'app-leave-apply',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './leave-apply.component.html'
+  // 2. ADD IT TO THE IMPORTS ARRAY
+  imports: [CommonModule, FormsModule,],
+  templateUrl: './leave-apply.component.html',
+  styleUrls: ['./leave-apply.component.css'] 
 })
 export class LeaveApplyComponent implements OnInit {
   associateId: string = '';
@@ -20,10 +24,22 @@ export class LeaveApplyComponent implements OnInit {
   statusMessage: string = '';
   isError: boolean = false;
 
+   @Output() close = new EventEmitter<void>();
+
+  leaveBalances = {
+    sickLeave: 3.00,
+    casualLeave: 6.00,
+    earnedLeave: 6.00
+  };
+
   constructor(
     private leaveService: LeaveService,
     private router: Router
   ) {}
+
+  onClose() {
+    this.close.emit();
+  }
 
   ngOnInit() {
     const storedId = localStorage.getItem('loggedInUser');
@@ -50,6 +66,9 @@ export class LeaveApplyComponent implements OnInit {
       next: (res) => {
         this.showMessage('Leave request submitted successfully!', false);
         this.leaveDate = ''; 
+        setTimeout(() => {
+          this.onClose();
+        }, 2000);
       },
       error: (err) => {
         console.error(err);
@@ -65,4 +84,5 @@ export class LeaveApplyComponent implements OnInit {
       this.statusMessage = '';
     }, 4000);
   }
+  
 }
