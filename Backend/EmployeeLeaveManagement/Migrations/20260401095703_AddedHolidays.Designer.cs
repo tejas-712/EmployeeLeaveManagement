@@ -4,6 +4,7 @@ using EmployeeLeaveManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeLeaveManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260401095703_AddedHolidays")]
+    partial class AddedHolidays
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -433,35 +436,6 @@ namespace EmployeeLeaveManagement.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EmployeeLeaveManagement.Models.LeaveBalance", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AssociateId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("CasualLeave")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("EarnedLeave")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("SickLeave")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AssociateId")
-                        .IsUnique();
-
-                    b.ToTable("LeaveBalances");
-                });
-
             modelBuilder.Entity("EmployeeLeaveManagement.Models.LeaveRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -597,22 +571,6 @@ namespace EmployeeLeaveManagement.Migrations
                         .IsRequired();
 
                     b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("EmployeeLeaveManagement.Models.LeaveBalance", b =>
-                {
-                    b.HasOne("EmployeeLeaveManagement.Models.Employee", "Employee")
-                        .WithOne("LeaveBalance")
-                        .HasForeignKey("EmployeeLeaveManagement.Models.LeaveBalance", "AssociateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("EmployeeLeaveManagement.Models.Employee", b =>
-                {
-                    b.Navigation("LeaveBalance");
                 });
 
             modelBuilder.Entity("EmployeeLeaveManagement.Models.Role", b =>

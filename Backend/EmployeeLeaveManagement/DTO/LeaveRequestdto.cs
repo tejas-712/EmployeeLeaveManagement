@@ -7,5 +7,6 @@
         public DateTime LeaveDate { get; set; }
         public string AbsenceType { get; set; }
 
+
     }
 }

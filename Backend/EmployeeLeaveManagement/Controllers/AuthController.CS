@@ -2,6 +2,7 @@
 using EmployeeLeaveManagement.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeLeaveManagement.Controllers
 {
@@ -32,7 +33,7 @@ namespace EmployeeLeaveManagement.Controllers
         }
         // to add employee
         [HttpPost("add")]
-        public IActionResult AddEmployee(Employee emp)
+        public async Task<IActionResult> AddEmployee([FromBody] Employee request)
         {
 
             // Validate model
@@ -41,10 +42,30 @@ namespace EmployeeLeaveManagement.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Employees.Add(emp);
-            _context.SaveChanges();
+            var existingUser = await _context.Employees
+           .FirstOrDefaultAsync(e => e.AssociateId == request.AssociateId);
 
-            return Ok(new { message = "Employee added successfully" });
+            if (existingUser != null)
+            {
+                return BadRequest(new { message = "Associate ID already exists." });
+            }
+
+            var roleExists = await _context.Roles.AnyAsync(r => r.Id == request.RoleId);
+            if (!roleExists)
+            {
+                return BadRequest(new { message = "Invalid Role selected." });
+            }
+            request.LeaveBalance = new LeaveBalance
+            {
+                SickLeave = 12.00m,
+                CasualLeave = 6.00m,
+                EarnedLeave = 6.00m
+            };
+
+            _context.Employees.Add(request);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Employee added successfully!" });
         }
 
         //all employee

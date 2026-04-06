@@ -1,67 +1,79 @@
-﻿using EmployeeLeaveManagement.Data;
+﻿using ClosedXML.Excel;
 using EmployeeLeaveManagement.DTO;
-using EmployeeLeaveManagement.Models;
+using EmployeeLeaveManagement.Services;
+using EmployeeLeaveManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeLeaveManagement.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // Becomes "api/Leave"
     [ApiController]
+    // 🚨 IMPORTANT: Make sure this is named LeaveController, NOT LeaveBalance! 🚨
     public class LeaveController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ILeaveService _leaveService;
 
-        public LeaveController(AppDbContext context)
+        public LeaveController(ILeaveService leaveService)
         {
-            _context = context;
+            _leaveService = leaveService;
         }
 
-        //apply leave 
-        [HttpPost("apply")]
-        public IActionResult ApplyLeave([FromBody] LeaveRequestdto req)
+        [HttpGet("balances/{associateId}")]
+        public async Task<IActionResult> GetLeaveBalances(string associateId)
         {
-            //validate assosiate id
-            if (string.IsNullOrEmpty(req.AssociateId))
-                return BadRequest("associateId is Required ");
-            //check employee exists 
-            var employeeExists = _context.Employees.Any(e => e.AssociateId == req.AssociateId);
+            var balances = await _leaveService.GetBalancesAsync(associateId);
 
-            if (!employeeExists)
-                return BadRequest("Invalid Associate Id ");
+            if (balances == null)
+                return NotFound(new { message = "Employee not found." });
 
+            return Ok(balances);
+        }
 
-            //prevent duplicate leave
+        [HttpPost("apply")]
+        public async Task<IActionResult> ApplyLeave([FromBody] LeaveRequestdto req)
+        {
+            var result = await _leaveService.ApplyLeaveAsync(req);
 
+            if (!result.Success)
+                return BadRequest(result.Message); // Returns the specific error from the service
 
-            var exists = _context.LeaveRequest.Any(l =>
-                   l.AssociateId == req.AssociateId &&
-                   l.LeaveDate.Date == req.LeaveDate.Date);
-
-
-            if (exists)
-                return BadRequest("Leave already appllied");
-
-            var leav = new LeaveRequest
-            {
-
-                AssociateId = req.AssociateId,
-                LeaveDate = req.LeaveDate,
-                AbsenceType = req.AbsenceType
-
-            };
-
-            //save the leave
-            _context.LeaveRequest.Add(leav);
-            _context.SaveChanges();
-            return Ok("leave Applied");
-
+            return Ok(result.Message);
         }
 
         [HttpGet("all")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(_context.LeaveRequest.ToList());
+            var leaves = await _leaveService.GetAllLeavesAsync();
+            return Ok(leaves);
+        }
+
+        [HttpGet("download")]
+        public async Task<IActionResult> DownloadExcel()
+        {
+            var leaves = await _leaveService.GetAllLeavesAsync();
+
+            using var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("LeaveReport");
+
+            // Headers
+            worksheet.Cell(1, 1).Value = "Associate ID";
+            worksheet.Cell(1, 2).Value = "Date";
+            worksheet.Cell(1, 3).Value = "Type";
+
+            // Data rows
+            for (int i = 0; i < leaves.Count; i++)
+            {
+                worksheet.Cell(i + 2, 1).Value = leaves[i].AssociateId;
+                worksheet.Cell(i + 2, 2).Value = leaves[i].LeaveDate.ToString("yyyy-MM-dd");
+                worksheet.Cell(i + 2, 3).Value = leaves[i].AbsenceType;
+            }
+
+            using var stream = new MemoryStream();
+            workbook.SaveAs(stream);
+            var content = stream.ToArray();
+
+            return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "LeaveTracker.xlsx");
         }
     }
 }

@@ -1,4 +1,10 @@
 using EmployeeLeaveManagement.Data;
+using EmployeeLeaveManagement.Repositories;
+
+using EmployeeLeaveManagement.Repositories.Interfaces;
+using EmployeeLeaveManagement.Services;
+
+using EmployeeLeaveManagement.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +28,10 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod()
                         .AllowAnyHeader());
 });
+
+// Register your new Layers!
+builder.Services.AddScoped<ILeaveRepository, LeaveRepository>();
+builder.Services.AddScoped<ILeaveService, LeaveService>();
 
 var app = builder.Build();
 

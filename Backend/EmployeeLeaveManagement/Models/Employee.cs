@@ -16,5 +16,14 @@ namespace EmployeeLeaveManagement.Models
         [Required(ErrorMessage = "Password is required")]
         [MinLength(6, ErrorMessage = "Password must be at least 6 characters")]
         public string Password { get; set; }
+
+        public int RoleId { get; set; }
+        public Role? Role { get; set; }
+
+        public int LocationId { get; set; }
+        public Location? Location { get; set; }
+
+        //NEW: One-to-One Relationship ---
+        public LeaveBalance? LeaveBalance { get; set; }
     }
 }
